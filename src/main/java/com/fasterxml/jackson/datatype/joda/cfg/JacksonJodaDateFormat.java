@@ -26,8 +26,14 @@ public class JacksonJodaDateFormat extends JacksonJodaFormatBase
     public JacksonJodaDateFormat(DateTimeFormatter defaultFormatter) {
         super();
         _formatter = defaultFormatter;
-        _jdkTimezone = defaultFormatter.getZone().toTimeZone();
-        _explicitTimezone = false;
+        DateTimeZone zone = defaultFormatter.getZone();
+		if (zone != null) {
+			_jdkTimezone = zone.toTimeZone();
+			_explicitTimezone = false;
+		} else {
+			_jdkTimezone = null;
+			_explicitTimezone = true;
+		}
     }
 
     public JacksonJodaDateFormat(JacksonJodaDateFormat base, Boolean useTimestamp)

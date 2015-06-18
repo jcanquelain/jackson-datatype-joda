@@ -1,10 +1,10 @@
 package com.fasterxml.jackson.datatype.joda.deser;
 
 import com.fasterxml.jackson.core.*;
-
 import com.fasterxml.jackson.databind.*;
 
 import org.joda.time.*;
+import org.joda.time.format.ISODateTimeFormat;
 
 import java.io.IOException;
 import java.util.TimeZone;
@@ -49,9 +49,9 @@ public class DateTimeDeserializer
             if (ctxt.isEnabled(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)) {
                 TimeZone tz = ctxt.getTimeZone();
                 DateTimeZone dtz = (tz == null) ? DateTimeZone.UTC : DateTimeZone.forTimeZone(tz);
-                return new DateTime(str, dtz);
+                return ISODateTimeFormat.dateTimeParser().withZone(dtz).parseDateTime(str);
             }
-            return DateTime.parse(str);
+            return ISODateTimeFormat.dateTimeParser().withOffsetParsed().parseDateTime(str);
         }
         throw ctxt.mappingException(handledType());
     }
