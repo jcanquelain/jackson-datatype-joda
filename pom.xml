@@ -9,7 +9,7 @@
   <groupId>com.fasterxml.jackson.datatype</groupId>
   <artifactId>jackson-datatype-joda</artifactId>
   <name>Jackson-datatype-Joda</name>
-  <version>2.6.0-rc3-SNAPSHOT</version>
+  <version>2.6.0.1</version>
   <packaging>bundle</packaging>
   <description>Add-on module for Jackson (http://jackson.codehaus.org) to support
 Joda (http://joda-time.sourceforge.net/) data types.
@@ -33,6 +33,20 @@ Joda (http://joda-time.sourceforge.net/) data types.
     <osgi.versionpolicy>${range;[===,+);${@}}</osgi.versionpolicy>
   </properties>
 
+	<distributionManagement>
+		<repository>
+			<id>seb-nexus-releases</id>
+			<name>SEB Nexus: Release</name>
+			<url>https://nexus.qa.openfoodsystem.com/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>seb-nexus-snapshots</id>
+			<name>SEB Nexus: Snapshots</name>
+			<url>https://nexus.qa.openfoodsystem.com/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	
   <dependencies>
     <!-- Extends Jackson mapper; but also needs annotations slightly,
          to support JsonFormat
